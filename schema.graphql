@@ -1,0 +1,34 @@
+type User @entity {
+  "This entity represents IDEXs user"
+  id: ID!
+  deposits: [IdexDeposit!]! @derivedFrom(field: "creator")
+  withdraws: [IdexWithdraw!]! @derivedFrom(field: "creator")
+  balances: [Balance!]! @derivedFrom(field: "user")
+}
+
+type IdexDeposit @entity {
+  "This entity represents deposit to IDEX"
+  id: ID!
+  amount:BigInt!
+  balance:BigInt!
+  token:Bytes!
+  creator:User!
+}
+
+type IdexWithdraw @entity {
+  "This entity represents withdraw to IDEX"
+  id: ID!
+  amount:BigInt!
+  balance:BigInt!
+  token:Bytes!
+  creator:User!
+}
+
+type Balance @entity {
+  "This entity represents token balances of users"
+  id: ID!
+  token: Bytes!
+  amount: BigInt!
+  user:User!
+
+}
